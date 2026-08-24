@@ -132,6 +132,7 @@ export default [
       {
         path: '/list/search',
         name: '搜索列表',
+        icon: 'read',
         component: './list/search',
         routes: [
           {
