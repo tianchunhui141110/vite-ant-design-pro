@@ -61,7 +61,7 @@ export default [
       },
       {
         path: '/admin/sub-page',
-        name: 'sub-page',
+        name: '二级管理页',
         component: './Admin',
       },
     ],
@@ -76,19 +76,19 @@ export default [
         redirect: '/dashboard/analysis',
       },
       {
-        name: 'analysis',
+        name: '分析页',
         icon: 'barChart',
         path: '/dashboard/analysis',
         component: './dashboard/analysis',
       },
       {
-        name: 'monitor',
+        name: '监控页',
         icon: 'monitor',
         path: '/dashboard/monitor',
         component: './dashboard/monitor',
       },
       {
-        name: 'workplace',
+        name: '工作台',
         icon: 'desktop',
         path: '/dashboard/workplace',
         component: './dashboard/workplace',
@@ -105,19 +105,19 @@ export default [
         redirect: '/form/basic-form',
       },
       {
-        name: 'basic-form',
+        name: '基础表单',
         icon: 'form',
         path: '/form/basic-form',
         component: './form/basic-form',
       },
       {
-        name: 'step-form',
+        name: '分步表单',
         icon: 'orderedList',
         path: '/form/step-form',
         component: './form/step-form',
       },
       {
-        name: 'advanced-form',
+        name: '高级表单',
         icon: 'profile',
         path: '/form/advanced-form',
         component: './form/advanced-form',
@@ -131,7 +131,7 @@ export default [
     routes: [
       {
         path: '/list/search',
-        name: 'search-list',
+        name: '搜索列表',
         component: './list/search',
         routes: [
           {
@@ -139,19 +139,19 @@ export default [
             redirect: '/list/search/articles',
           },
           {
-            name: 'articles',
+            name: '搜索列表（文章）',
             icon: 'read',
             path: '/list/search/articles',
             component: './list/search/articles',
           },
           {
-            name: 'projects',
+            name: '搜索列表（项目）',
             icon: 'project',
             path: '/list/search/projects',
             component: './list/search/projects',
           },
           {
-            name: 'applications',
+            name: '搜索列表（应用）',
             icon: 'appstore',
             path: '/list/search/applications',
             component: './list/search/applications',
@@ -163,19 +163,19 @@ export default [
         redirect: '/list/table-list',
       },
       {
-        name: 'table-list',
+        name: '查询表格',
         icon: 'table',
         path: '/list/table-list',
         component: './table-list',
       },
       {
-        name: 'basic-list',
+        name: '标准列表',
         icon: 'unorderedList',
         path: '/list/basic-list',
         component: './list/basic-list',
       },
       {
-        name: 'card-list',
+        name: '卡片列表',
         icon: 'creditCard',
         path: '/list/card-list',
         component: './list/card-list',
@@ -192,13 +192,13 @@ export default [
         redirect: '/profile/basic',
       },
       {
-        name: 'basic',
+        name: '基础详情页',
         icon: 'idcard',
         path: '/profile/basic',
         component: './profile/basic',
       },
       {
-        name: 'advanced',
+        name: '高级详情页',
         icon: 'crown',
         path: '/profile/advanced',
         component: './profile/advanced',
@@ -215,13 +215,13 @@ export default [
         redirect: '/result/success',
       },
       {
-        name: 'success',
+        name: '成功页',
         icon: 'checkCircle',
         path: '/result/success',
         component: './result/success',
       },
       {
-        name: 'fail',
+        name: '失败页',
         icon: 'closeCircle',
         path: '/result/fail',
         component: './result/fail',
@@ -267,13 +267,13 @@ export default [
         redirect: '/account/center',
       },
       {
-        name: 'center',
+        name: '个人中心',
         icon: 'user',
         path: '/account/center',
         component: './account/center',
       },
       {
-        name: 'settings',
+        name: '个人设置',
         icon: 'setting',
         path: '/account/settings',
         component: './account/settings',
