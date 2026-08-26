@@ -10,7 +10,14 @@ import { router } from './router';
 import './global.less';
 import '../tailwind.css';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60_000,
+      retry: 1,
+    },
+  },
+});
 
 // 让组件外的 history 兼容层拿到 router 实例
 setRouter(router);

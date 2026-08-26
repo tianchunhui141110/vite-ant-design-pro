@@ -203,7 +203,6 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      { path: 'chatbot', element: lazyPage(() => import('@/pages/chatbot')) },
       { path: '*', element: <Exception404 /> },
     ],
   },

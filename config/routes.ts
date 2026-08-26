@@ -282,12 +282,6 @@ export default [
     ],
   },
   {
-    path: '/chatbot',
-    name: 'AI 助手',
-    icon: 'robot',
-    component: './chatbot',
-  },
-  {
     path: '/',
     redirect: '/dashboard/analysis',
   },

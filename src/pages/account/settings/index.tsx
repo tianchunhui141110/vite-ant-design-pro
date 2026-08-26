@@ -1,6 +1,6 @@
 import { GridContent } from '@ant-design/pro-components';
 import { Menu } from 'antd';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import BaseView from './components/base';
 import BindingView from './components/binding';
 import NotificationView from './components/notification';
@@ -49,7 +49,7 @@ const Settings: React.FC = () => {
   });
   const dom = useRef<HTMLDivElement>(null);
 
-  const resize = () => {
+  const resize = useCallback(() => {
     requestAnimationFrame(() => {
       if (!dom.current) {
         return;
@@ -67,19 +67,16 @@ const Settings: React.FC = () => {
         mode: mode as SettingsState['mode'],
       }));
     });
-  };
-
-  const resizeRef = useRef(resize);
-  resizeRef.current = resize;
+  }, []);
 
   useLayoutEffect(() => {
-    const handler = () => resizeRef.current();
+    const handler = () => resize();
     window.addEventListener('resize', handler);
     handler();
     return () => {
       window.removeEventListener('resize', handler);
     };
-  }, []);
+  }, [resize]);
   return (
     <GridContent>
       <div

@@ -12,10 +12,7 @@ import { errorConfig } from '@/requestErrorConfig';
  *   request<T>(url, { method, params, data, headers, skipErrorHandler })
  */
 const instance: AxiosInstance = axios.create({
-  baseURL:
-    (import.meta.env.DEV
-      ? ''
-      : 'https://pro-api.ant-design-demo.workers.dev') || undefined,
+  baseURL: import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? '' : undefined),
   timeout: 30000,
 });
 

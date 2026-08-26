@@ -7,7 +7,7 @@ import {
 import {App, Button, Form, Input} from 'antd';
 import {useState} from 'react';
 
-import {Helmet, useModel} from '@/max';
+import {Helmet, history, useModel} from '@/max';
 import {login} from '@/services/ant-design-pro/api';
 import {AnimatedCharacters} from './AnimatedCharacters';
 import FeishuIcon from './FeishuIcon';
@@ -63,7 +63,7 @@ export default function Login() {
         const urlParams = new URL(window.location.href).searchParams;
         const redirectUrl = getSafeRedirectUrl(urlParams.get('redirect'));
         setTimeout(() => {
-          window.location.href = redirectUrl;
+          history.replace(redirectUrl);
         }, 500);
         return;
       }
@@ -103,7 +103,15 @@ export default function Login() {
         <div className={styles.formWrapper}>
           <div className={styles.mobileLogo}>
             <div className={styles.mobileLogoIcon}>
-              <svg width="20" height="20" viewBox="0 0 28 28" fill="none">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 28 28"
+                fill="none"
+                role="img"
+                aria-label="Nexus 平台 Logo"
+              >
+                <title>Nexus 平台 Logo</title>
                 <path
                   d="M7 14L12 9L17 14L12 19L7 14Z"
                   fill="#1E40AF"

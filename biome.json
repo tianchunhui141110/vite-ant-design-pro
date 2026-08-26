@@ -26,6 +26,21 @@
       "!**/.worktrees"
     ]
   },
+  "overrides": [
+    {
+      "includes": ["**/*.module.css"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "noImportantStyles": "off"
+          },
+          "correctness": {
+            "noUnknownPseudoClass": "off"
+          }
+        }
+      }
+    }
+  ],
   "formatter": {
     "enabled": true,
     "indentStyle": "space"

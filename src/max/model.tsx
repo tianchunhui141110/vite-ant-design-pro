@@ -38,13 +38,6 @@ export function InitialStateProvider({
   return <>{children}</>;
 }
 
-// 其它 model 暂不支持时的空实现
-const emptyModel = {
-  initialState: null,
-  setInitialState: () => {},
-  loading: false,
-};
-
 /**
  * 兼容 umi 的 useModel API，当前仅支持 '@@initialState'。
  */
@@ -58,8 +51,10 @@ export function useModel(namespace: string): {
   const loading = useInitialStateStore((s) => s.loading);
 
   if (namespace !== '@@initialState') {
-    // 其它 model 暂不支持，返回空实现避免报错
-    return emptyModel;
+    // 其它 model 暂不支持，直接报错便于尽早发现拼写错误
+    throw new Error(
+      `[useModel] 暂不支持的 model namespace: "${namespace}"，当前仅支持 "@@initialState"`,
+    );
   }
   return { initialState, setInitialState, loading };
 }

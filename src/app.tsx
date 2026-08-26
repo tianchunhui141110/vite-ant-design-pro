@@ -3,7 +3,7 @@ import type {MenuDataItem, Settings as LayoutSettings,} from '@ant-design/pro-co
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import React from 'react';
-import {AvatarDropdown, DocLink, ErrorBoundary, Footer} from '@/components';
+import {AvatarDropdown, ErrorBoundary, Footer} from '@/components';
 import {history, Link, type RunTimeLayoutConfig} from '@/max';
 import {currentUser as queryCurrentUser} from '@/services/ant-design-pro/api';
 import defaultSettings from '../config/defaultSettings';
@@ -153,14 +153,9 @@ export const layout: RunTimeLayoutConfig = ({
     // 二级及以上子菜单标题同样显示 icon
     subMenuItemRender: (item: MenuDataItem, dom: React.ReactNode, props: unknown) =>
       injectMenuIcon(item, dom, props as MenuRenderCtx, true),
-    actionsRender: () => {
-      return [
-        <DocLink key="doc"/>,
-      ];
-    },
     avatarProps: {
-      src: initialState?.currentUser?.avatar,
-      title: 'ProUser',
+      src: initialState?.currentUser?.avatar || '',
+      title: initialState?.currentUser?.name || '',
       render: (_: React.ReactNode, avatarChildren: React.ReactNode) => (
         <AvatarDropdown>{avatarChildren}</AvatarDropdown>
       ),

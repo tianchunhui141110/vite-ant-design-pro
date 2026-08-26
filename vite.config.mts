@@ -36,10 +36,14 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       tailwindcss(),
-      // dev 环境下启用 mock（对应原 umi 的 mock 功能）
+      // dev / mock 模式下启用本地 mock（对应原 umi 的 mock 功能）
+      // - dev：默认开发环境，配合本地代理使用；
+      // - mock：由 npm run dev:mock 触发（vite --mode mock），此时不会注入
+      //   .env.development 里的 VITE_API_BASE_URL，请求走本地 mock，
+      //   不影响 dev / test / prod 的环境配置。
       // 自研中间件（mock/vite-plugin.mts），加载 mock 目录下入口，
       // 兼容 umi 的 mock 对象格式（通过 defineMock 转换），支持热重载
-      isDev && umiMockServer({ prefix: '/api' }),
+      (isDev || mode === 'mock') && umiMockServer({ prefix: '/api' }),
     ],
     resolve: {
       alias: {
