@@ -2,6 +2,14 @@
 /* eslint-disable */
 import { request } from '@/max';
 
+/** 获取当前用户菜单（后端权限模式） GET /api/user/menus */
+export async function getUserMenus(options?: { [key: string]: any }) {
+  return request<{ data: any[] }>('/api/user/menus', {
+    method: 'GET',
+    ...(options || {}),
+  });
+}
+
 /** 获取当前的用户 GET /api/currentUser */
 export async function currentUser(options?: { [key: string]: any }) {
   return request<{

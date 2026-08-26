@@ -6,6 +6,7 @@ import React from 'react';
 import {AvatarDropdown, ErrorBoundary, Footer} from '@/components';
 import {history, Link, type RunTimeLayoutConfig} from '@/max';
 import {currentUser as queryCurrentUser} from '@/services/ant-design-pro/api';
+import {createStorageManager} from '@/utils/storage';
 import defaultSettings from '../config/defaultSettings';
 
 // Initialize dayjs plugins globally
@@ -73,8 +74,10 @@ const injectMenuIcon = (
   return React.cloneElement(titleEl, {children: [iconEl, textWithCls]});
 };
 
-/** 主题设置在 localStorage 中的存储 key（配合 SettingDrawer 持久化） */
-export const SETTINGS_STORAGE_KEY = 'pro-layout-settings';
+/** 主题设置存储：带版本号前缀 + 旧键自动迁移（配合 SettingDrawer 持久化） */
+export const settingsStorage = createStorageManager<Partial<LayoutSettings>>(
+  'pro-layout-settings',
+);
 
 /**
  * 全局初始化数据（原 umi getInitialState），由 InitialStateProvider 加载。
@@ -99,14 +102,8 @@ export async function getInitialState(): Promise<{
     }
     return undefined;
   };
-  // 恢复上次保存的主题设置（SettingDrawer 修改后写入 localStorage）
-  let savedSettings: Partial<LayoutSettings> = {};
-  try {
-    const raw = localStorage.getItem(SETTINGS_STORAGE_KEY);
-    if (raw) savedSettings = JSON.parse(raw) as Partial<LayoutSettings>;
-  } catch {
-    savedSettings = {};
-  }
+  // 恢复上次保存的主题设置（带版本迁移，兼容历史无版本前缀的旧键）
+  const savedSettings = settingsStorage.get() ?? {};
   const settings = {
     ...defaultSettings,
     ...savedSettings,

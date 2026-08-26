@@ -9,6 +9,7 @@ export { history, setRouter } from './history';
 export type { InitialState } from './model';
 export { InitialStateProvider, useModel } from './model';
 export { request } from './request';
+export type { RequestOptions } from './request';
 export {
   Link,
   Navigate,
@@ -18,21 +19,6 @@ export {
   useNavigate,
   useSearchParams,
 } from './router';
-
-/**
- * 兼容 umi 的 RequestConfig 类型。
- * 用于 src/requestErrorConfig.ts 的配置声明。
- */
-export interface RequestConfig {
-  errorConfig?: {
-    errorThrower?: (res: unknown) => void;
-    errorHandler?: (error: unknown, opts: unknown) => void;
-  };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  requestInterceptors?: Array<(config: any) => any>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  responseInterceptors?: Array<(response: any) => any>;
-}
 
 /**
  * 兼容 umi 的 RunTimeLayoutConfig 类型。

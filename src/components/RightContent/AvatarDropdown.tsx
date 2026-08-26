@@ -6,11 +6,12 @@ import {
   SkinOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import type {Settings as LayoutSettings} from '@ant-design/pro-components';
 import type {MenuProps} from 'antd';
 import {Avatar, Spin} from 'antd';
 import {createStyles} from 'antd-style';
 import React, {startTransition} from 'react';
-import {SETTINGS_STORAGE_KEY} from '@/app';
+import {settingsStorage} from '@/app';
 import {history, useModel} from '@/max';
 import {outLogin} from '@/services/ant-design-pro/api';
 import HeaderDropdown from '../HeaderDropdown';
@@ -211,8 +212,8 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = () => {
       const newSettings = {
         ...(initialState?.settings ?? {}),
         navTheme: isDark ? 'light' : 'realDark',
-      };
-      localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(newSettings));
+      } as Partial<LayoutSettings>;
+      settingsStorage.set(newSettings);
       setInitialState((s) => ({...s, settings: newSettings}));
       return;
     }

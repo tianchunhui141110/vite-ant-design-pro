@@ -1,6 +1,24 @@
 import type { Request, Response } from 'express';
+import routes from '../config/routes';
 import { defineMock } from './defineMock.mts';
 import { waitTime, defaultUser } from './utils';
+
+/** 模拟后端按角色过滤菜单（对应后端权限模式 VITE_ACCESS_MODE=backend） */
+function filterMenusForUser(items: any[], canAdmin: boolean): any[] {
+  return items
+    .filter(
+      (item) =>
+        !item.access || (item.access === 'canAdmin' && canAdmin),
+    )
+    .map((item) =>
+      item.routes
+        ? { ...item, routes: filterMenusForUser(item.routes, canAdmin) }
+        : item,
+    )
+    .filter(
+      (item) => item.path || (item.routes && item.routes.length > 0),
+    );
+}
 
 const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION } = process.env;
 
@@ -100,6 +118,14 @@ export default defineMock({
   'POST /api/login/outLogin': (_req: Request, res: Response) => {
     access = '';
     res.send({ data: {}, success: true });
+  },
+  // 后端权限模式下的菜单接口：按当前角色过滤返回
+  'GET /api/user/menus': (_req: Request, res: Response) => {
+    const canAdmin = getAccess() === 'admin';
+    res.send({
+      success: true,
+      data: filterMenusForUser(routes, canAdmin),
+    });
   },
   'GET /api/500': (_req: Request, res: Response) => {
     res.status(500).send({
